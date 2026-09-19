@@ -1,0 +1,17 @@
+name: HeldenNachbau
+version: '${project.version}'
+main: com.nachbau.helden.HeldenPlugin
+api-version: '1.21'
+authors: [TracesoYT]
+description: Nachbau des Paper-Plugins "MinecraftHelden" (Season 2)
+
+commands:
+  mchelden:
+    description: Admin Command
+    permission: mchelden.admin
+  duel:
+    description: Duel Command
+  linkedheart:
+    description: Linked Heart Command
+  combat:
+    description: Combat Mode Command

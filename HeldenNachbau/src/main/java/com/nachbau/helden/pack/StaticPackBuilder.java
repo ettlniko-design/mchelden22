@@ -1,4 +1,4 @@
-package com.nachbau.helden.pack;
+ackage com.nachbau.helden.pack;
 
 import com.nachbau.helden.HeldenPlugin;
 import com.nachbau.helden.state.GlyphAllocator;
@@ -67,12 +67,19 @@ public final class StaticPackBuilder {
         try (ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(outFile)),
                 java.nio.charset.StandardCharsets.UTF_8)) {
 
-            // pack.mcmeta
+            // pack.mcmeta - inkl. min_format/max_format (Array-Schema), das
+            // neuere Minecraft-Versionen (ab ca. 1.21.9) zusaetzlich zum alten
+            // "pack_format" erwarten. Ohne das kann es passieren, dass der
+            // Client das Pack zwar laedt (Titel/Beschreibung erscheinen), aber
+            // Font-Provider als "inkompatibel" verwirft - daher leere Kaestchen
+            // statt der Herzen.
             writeEntry(zos, "pack.mcmeta", ("""
                     {
                       "pack": {
                         "pack_format": 48,
-                        "supported_formats": [42, 64],
+                        "supported_formats": [1, 999],
+                        "min_format": [1, 0],
+                        "max_format": [999, 0],
                         "description": "HeldenNachbau HUD-Pack"
                       }
                     }

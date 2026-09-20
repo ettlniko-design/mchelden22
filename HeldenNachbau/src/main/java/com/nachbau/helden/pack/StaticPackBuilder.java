@@ -1,4 +1,4 @@
-ackage com.nachbau.helden.pack;
+package com.nachbau.helden.pack;
 
 import com.nachbau.helden.HeldenPlugin;
 import com.nachbau.helden.state.GlyphAllocator;

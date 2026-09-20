@@ -214,6 +214,9 @@ public final class StaticPackBuilder {
                     Component.text("Bitte lade das Texture Pack für die Herzen!"), false);
         } catch (Exception e) {
             HeldenPlugin.instance.getLogger().warning("Could not send resource pack: " + e.getMessage());
+            player.sendMessage(Component.text(
+                    "Texture Pack konnte nicht gesendet werden (Admin-Fehler, siehe Konsole).")
+                    .color(net.kyori.adventure.text.format.NamedTextColor.RED));
         }
     }
 }

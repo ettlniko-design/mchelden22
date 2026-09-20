@@ -179,9 +179,29 @@ public final class McHeldenCommand implements CommandExecutor, TabCompleter {
                         .color(NamedTextColor.RED));
                 return;
             }
+
+            String url = args[2];
+            String sha1 = args[3].trim().toLowerCase(Locale.ROOT);
+
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                sender.sendMessage(Component.text(
+                        "Die URL muss mit http:// oder https:// beginnen! Bekommen: " + url)
+                        .color(NamedTextColor.RED));
+                return;
+            }
+
+            if (!sha1.matches("[0-9a-f]{40}")) {
+                sender.sendMessage(Component.text(
+                        "Der SHA1 ist ungueltig - er muss genau 40 Hex-Zeichen lang sein (bekommen: "
+                                + sha1.length() + " Zeichen: '" + sha1 + "'). "
+                                + "Kopier ihn nochmal 1:1 aus der Ausgabe von /mchelden pack build.")
+                        .color(NamedTextColor.RED));
+                return;
+            }
+
             ServerState state = PluginStateManager.getServerState();
-            state.packUrl = args[2];
-            state.packSha1 = args[3];
+            state.packUrl = url;
+            state.packSha1 = sha1;
             PluginStateManager.save();
             sender.sendMessage(Component.text("Pack-URL gesetzt. Neue Spieler bekommen sie beim Join.")
                     .color(NamedTextColor.GREEN));
